@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TelefonBook {
     /// <summary>
@@ -10,6 +11,7 @@ namespace TelefonBook {
         /// Название отдела
         /// </summary>
         public string Name { get; set; }
-        public Divison Divison { get; set; }
+        [Required]
+        public virtual Divison Divison { get; set; }
     }
 }

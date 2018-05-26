@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TelefonBook {
     /// <summary>
@@ -22,9 +23,9 @@ namespace TelefonBook {
         /// Домашний телефон, обычно личный номер, по которому сотрудника возможно найти в нерабочее время
         /// </summary>
         public string NumberHomePhone { get; set; }
-
-        public Position Position { get; set; }
-
-        public ExtensionPhone ExtensionPhone { get; set; }
+        [Required]
+        public virtual Position Position { get; set; }
+        [Required]
+        public virtual ExtensionPhone ExtensionPhone { get; set; }
     }
 }
