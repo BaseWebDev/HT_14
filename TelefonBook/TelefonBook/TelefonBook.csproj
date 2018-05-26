@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompanyPhoneBook.cs" />
+    <Compile Include="ConsoleMenu.cs" />
     <Compile Include="Divison.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="ExtensionPhone.cs" />
