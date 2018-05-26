@@ -4,7 +4,7 @@ namespace TelefonBook {
     /// <summary>
     /// Внутренние номера телефонов
     /// </summary>
-    class ExtensionPhone {
+    public class ExtensionPhone {
         public int Id { get; set; }
         /// <summary>
         /// Внутренний номер

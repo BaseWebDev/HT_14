@@ -4,7 +4,7 @@ namespace TelefonBook {
     /// <summary>
     /// Справочник сотрудников
     /// </summary>
-    class Employee {
+    public class Employee {
         public int Id { get; set; }
         /// <summary>
         /// Фамилия
@@ -22,5 +22,9 @@ namespace TelefonBook {
         /// Домашний телефон, обычно личный номер, по которому сотрудника возможно найти в нерабочее время
         /// </summary>
         public string NumberHomePhone { get; set; }
+
+        public Position Position { get; set; }
+
+        public ExtensionPhone ExtensionPhone { get; set; }
     }
 }

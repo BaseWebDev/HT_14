@@ -4,7 +4,7 @@ namespace TelefonBook {
     /// <summary>
     /// Подразделение компании
     /// </summary>
-    class Divison {
+    public class Divison {
         public int Id { get; set; }
         /// <summary>
         /// Название подразделения
