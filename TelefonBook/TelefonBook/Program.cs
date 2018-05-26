@@ -29,27 +29,63 @@ namespace TelefonBook {
 
         static void New() {
             var db = new CompanyPhoneBook();
+            Employee emp = new Employee();
             Console.Write("Добавить контакт сотрудника."); Console.WriteLine("Введите:");
-            Employee employee = new Employee() {
-                FirstName = Console.ReadLine(),
-                MiddleName = Console.ReadLine(),
-                LastName = Console.ReadLine(),
-                NumberHomePhone = Console.ReadLine(),
-                ExtensionPhone = new ExtensionPhone() {
-                    Number = Console.ReadLine(),
-                    InstallationSite = Console.ReadLine(),
-                },
-                Position = new Position() {
-                    Name = Console.ReadLine(),
-                    Subdivison = new Subdivison() {
-                        Name = Console.ReadLine(),
-                        Divison = new Divison() {
-                            Name = Console.ReadLine(),
-                        }
-                    }
-                }
-            };
-            db.Employees.Add(employee);
+            Console.Write("Фамилия: ");             emp.LastName = Console.ReadLine();
+            Console.Write("Имя: ");                 emp.FirstName = Console.ReadLine();
+            Console.Write("Отчество: ");            emp.MiddleName = Console.ReadLine();
+            Console.Write("Домашний телефон: ");    emp.NumberHomePhone = Console.ReadLine();
+            
+            Console.Write("Внутренний телефон: ");  string empExtensionPhoneNumber = Console.ReadLine();
+            ExtensionPhone findExtensionPhone = db.Employees
+                                .Select(e=>e.ExtensionPhone)
+                                .Where(o => o.Number == empExtensionPhoneNumber)
+                                .FirstOrDefault();
+            if (findExtensionPhone != null) {
+                emp.ExtensionPhone = findExtensionPhone;
+            } else {
+                emp.ExtensionPhone = new ExtensionPhone();
+                emp.ExtensionPhone.Number = empExtensionPhoneNumber;
+                Console.Write("Место установки: "); emp.ExtensionPhone.InstallationSite = Console.ReadLine();
+            }           
+            Console.Write("Должность: ");           string empPositionName = Console.ReadLine();
+            Position findEmpPosition = db.Employees
+                                .Select(e => e.Position)
+                                .Where(o => o.Name == empPositionName)
+                                .FirstOrDefault();
+            if (findEmpPosition != null) {
+                emp.Position = findEmpPosition;
+            } else {
+                emp.Position = new Position();
+                emp.Position.Name = empPositionName;
+            }
+            Console.Write("Отдел: ");               string empPositionSubdivisonName = Console.ReadLine();
+            Subdivison findEmpPositionSubdivison = db.Employees
+                                .Select(e => e.Position)
+                                .Select(t => t.Subdivison)
+                                .Where(o => o.Name == empPositionSubdivisonName)
+                                .FirstOrDefault();
+            if (findEmpPositionSubdivison != null) {
+                emp.Position.Subdivison = findEmpPositionSubdivison;
+            } else {
+                emp.Position.Subdivison = new Subdivison();
+                emp.Position.Subdivison.Name = empPositionSubdivisonName;
+            }
+            // emp.Position.Subdivison.Divison = new Divison();
+            Console.Write("Подразделение: ");       string empPositionSubdivisonDivisonName = Console.ReadLine();
+            Divison findEmpPositionSubdivisonDivison = db.Employees
+                                .Select(e => e.Position)
+                                .Select(t => t.Subdivison)
+                                .Select(y => y.Divison)
+                                .Where(o => o.Name == empPositionSubdivisonDivisonName)
+                                .FirstOrDefault();
+            if (findEmpPositionSubdivisonDivison != null) {
+                emp.Position.Subdivison.Divison = findEmpPositionSubdivisonDivison;
+            } else {
+                emp.Position.Subdivison.Divison = new Divison();
+                emp.Position.Subdivison.Divison.Name = empPositionSubdivisonDivisonName;
+            }
+            db.Employees.Add(emp);
             db.SaveChanges();
         }
         static void Delete() {          
