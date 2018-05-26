@@ -2,7 +2,7 @@
 
 namespace TelefonBook {
     /// <summary>
-    /// http://studassistent.ru/charp/menyu-v-konsolnom-prilozhenii-c
+    /// На основе http://studassistent.ru/charp/menyu-v-konsolnom-prilozhenii-c
     /// </summary>
     class ConsoleMenu {
         string[] menuItems;
