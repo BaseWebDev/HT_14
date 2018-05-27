@@ -7,10 +7,12 @@ namespace TelefonBook {
     /// </summary>
     public class Employee {
         public int Id { get; set; }
+        [Required]
         /// <summary>
         /// Фамилия
         /// </summary>
         public string LastName { get; set; }
+        [Required]
         /// <summary>
         /// Имя
         /// </summary>
