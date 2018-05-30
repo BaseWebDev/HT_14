@@ -13,8 +13,8 @@ namespace ConsoleView {
         const string hMain = "\t Телефонный справочник предприятия";
         const string hContact = "Выбирите действие для контакта:";
         string[] items = { "Вывести все контакты", "Создать новый", "Найти",  "Удалить",   "Инициализация", "Выход"};
-
-        public string[] InputContact { get; private set; }
+        
+        public List<string> InputContact { get; private set; }
         public string InputFindContact { get; private set; }
 
         public event EventHandler<EventArgs> SetShowAllContacts;
@@ -43,18 +43,19 @@ namespace ConsoleView {
             }
         }
         void New() {
+            InputContact = new List<string>();
             Console.Write("Добавить контакт сотрудника."); Console.WriteLine("Введите:");
-            Console.Write("Фамилия: "); InputContact[0] = Console.ReadLine();
-            Console.Write("Имя: "); InputContact[1] = Console.ReadLine();
-            Console.Write("Отчество: "); InputContact[2] = Console.ReadLine();
-            Console.Write("Домашний телефон: "); InputContact[3] = Console.ReadLine();
+            Console.Write("Фамилия: "); InputContact.Add(Console.ReadLine());
+            Console.Write("Имя: "); InputContact.Add(Console.ReadLine());
+            Console.Write("Отчество: "); InputContact.Add(Console.ReadLine());
+            Console.Write("Домашний телефон: "); InputContact.Add(Console.ReadLine());
 
-            Console.Write("Внутренний телефон: "); InputContact[4] = Console.ReadLine();
-            Console.Write("Место установки: "); InputContact[5] = Console.ReadLine();
-            
-            Console.Write("Должность: "); InputContact[6] = Console.ReadLine();
-            Console.Write("Отдел: "); InputContact[7] = Console.ReadLine();
-            Console.Write("Подразделение: "); InputContact[8] = Console.ReadLine();
+            Console.Write("Внутренний телефон: "); InputContact.Add(Console.ReadLine());
+            Console.Write("Место установки: "); InputContact.Add(Console.ReadLine());
+
+            Console.Write("Должность: "); InputContact.Add(Console.ReadLine());
+            Console.Write("Отдел: "); InputContact.Add(Console.ReadLine());
+            Console.Write("Подразделение: "); InputContact.Add(Console.ReadLine());
             if (SetNewContact != null) {
                 SetNewContact(this, EventArgs.Empty);
             }

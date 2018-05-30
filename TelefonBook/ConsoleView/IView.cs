@@ -10,7 +10,7 @@ namespace ConsoleView {
         /// <summary>
         /// Список строк для создания нового контакта
         /// </summary>
-        string[] InputContact { get; }
+        List<string> InputContact { get; }
         /// <summary>
         /// Строка для поиска по фамилии и внутреннему номеру
         /// </summary>

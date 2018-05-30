@@ -57,7 +57,7 @@ namespace TelefonBook {
         /// <returns></returns>
         public List<Employee> ShowAll() {
             using (var db = new CompanyPhoneBook()) {
-                var emp = db.Employees.Select(x => x).ToList();
+                var emp = db.Employees.ToList();
                 return emp;
                 //foreach (var emp in emps) { 
                 //    yield return emp;
