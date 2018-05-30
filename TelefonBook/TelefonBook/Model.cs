@@ -140,7 +140,7 @@ namespace TelefonBook {
             return find != null ? find : new Position() { Name = name };
         }
 
-        ExtensionPhone GetOrFindExtensionPhone(CompanyPhoneBook db, Employee emp, string number, string site) {
+        ExtensionPhone GetOrFindExtensionPhone(CompanyPhoneBook db, string number, string site) {
             var find = db.Employees
                                .Select(e => e.ExtensionPhone)
                                 .Where(o => o.Number == number)
