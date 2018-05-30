@@ -15,10 +15,10 @@ namespace TelefonBook {
                     LastName = emp.LastName,
                     NumberHomePhone = emp.NumberHomePhone,
                 };
-                tempEmp.ExtensionPhone = GetOrFindExtensionPhone(db, emp.ExtensionPhone.Number, emp.ExtensionPhone.InstallationSite);
-                tempEmp.Position = GetOrFindPosition(db, emp.Position.Name);
-                tempEmp.Position.Subdivison = GetOrFindSubdivison(db, emp.Position.Subdivison.Name);
-                tempEmp.Position.Subdivison.Divison = GetOrFindDivison(db, emp.Position.Subdivison.Divison.Name);
+                tempEmp= GetOrFindExtensionPhone(db, tempEmp, emp.ExtensionPhone.Number, emp.ExtensionPhone.InstallationSite);
+                tempEmp= GetOrFindPosition(db, tempEmp, emp.Position.Name);
+                tempEmp= GetOrFindSubdivison(db, tempEmp, emp.Position.Subdivison.Name);
+                tempEmp= GetOrFindDivison(db, tempEmp, emp.Position.Subdivison.Divison.Name);
                 db.Employees.Add(tempEmp);
                 db.SaveChanges();
             }
@@ -76,10 +76,10 @@ namespace TelefonBook {
                     LastName = "Иванов",
                     NumberHomePhone = "8-915-841-30-08",
                 };
-                Ivanov.ExtensionPhone = GetOrFindExtensionPhone(db, "432", "Здание Управления, 3 этаж, каб. 25");
-                Ivanov.Position = GetOrFindPosition(db, "Главный экономист");
-                Ivanov.Position.Subdivison = GetOrFindSubdivison(db, "Плановый отдел");
-                Ivanov.Position.Subdivison.Divison = GetOrFindDivison(db, "Упраление");
+                Ivanov= GetOrFindExtensionPhone(db, Ivanov, "432", "Здание Управления, 3 этаж, каб. 25");
+                Ivanov= GetOrFindPosition(db, Ivanov, "Главный экономист");
+                Ivanov= GetOrFindSubdivison(db, Ivanov, "Плановый отдел");
+                Ivanov= GetOrFindDivison(db, Ivanov, "Упраление");
                 db.Employees.Add(Ivanov);
 
                 Employee Petrov = new Employee() {
@@ -88,10 +88,10 @@ namespace TelefonBook {
                     LastName = "Петров",
                     NumberHomePhone = "8-985-834-23-76"
                 };
-                Petrov.ExtensionPhone = GetOrFindExtensionPhone(db, "156", "Здание Управления, 2 этаж, каб. 11");
-                Petrov.Position = GetOrFindPosition(db, "Оператор ЭВМ");
-                Petrov.Position.Subdivison = GetOrFindSubdivison(db, "ОМТС");
-                Petrov.Position.Subdivison.Divison = GetOrFindDivison(db, "Упраление");
+                Petrov= GetOrFindExtensionPhone(db, Petrov, "156", "Здание Управления, 2 этаж, каб. 11");
+                Petrov= GetOrFindPosition(db, Petrov, "Оператор ЭВМ");
+                Petrov= GetOrFindSubdivison(db, Petrov, "ОМТС");
+                Petrov= GetOrFindDivison(db, Petrov, "Упраление");
                 db.Employees.Add(Petrov);
 
                 Employee Sidorov = new Employee() {
@@ -100,10 +100,10 @@ namespace TelefonBook {
                     LastName = "Сидоров",
                     NumberHomePhone = "8-910-123-38-07",
                 };
-                Sidorov.ExtensionPhone = GetOrFindExtensionPhone(db, "232", "Здание Управления, 3 этаж, каб. 25");
-                Sidorov.Position = GetOrFindPosition(db, "Начальник отдела");
-                Sidorov.Position.Subdivison = GetOrFindSubdivison(db, "Плановый отдел");
-                Sidorov.Position.Subdivison.Divison = GetOrFindDivison(db, "Упраление");
+                Sidorov= GetOrFindExtensionPhone(db, Sidorov, "232", "Здание Управления, 3 этаж, каб. 25");
+                Sidorov= GetOrFindPosition(db, Sidorov, "Начальник отдела");
+                Sidorov= GetOrFindSubdivison(db, Sidorov, "Плановый отдел");
+                Sidorov= GetOrFindDivison(db, Sidorov, "Упраление");
                 db.Employees.Add(Sidorov);
                 db.SaveChanges();
             }
@@ -115,40 +115,57 @@ namespace TelefonBook {
                                .FirstOrDefault();
             return find != null ? find : new Employee() { FirstName = firstName, LastName = lastName, MiddleName = middleName };
         }
-        Divison GetOrFindDivison(CompanyPhoneBook db, string name) {
+        Employee GetOrFindDivison(CompanyPhoneBook db, Employee emp, string name) {
             var find = db.Employees
                                .Select(e => e.Position)
                                .Select(t => t.Subdivison)
                                .Select(y => y.Divison)
                                .Where(o => o.Name == name)
                                .FirstOrDefault();
-            return find != null ? find : new Divison() {Name = name};
+            if (find != null) {
+                emp.Position.Subdivison.Divison = find;
+            } else {
+                emp.Position.Subdivison.Divison = new Divison() { Name = name };
+            }
+            return emp;
         }
-        Subdivison GetOrFindSubdivison(CompanyPhoneBook db, string name) {
+        Employee GetOrFindSubdivison(CompanyPhoneBook db, Employee emp, string name) {
             var find = db.Employees
                                .Select(e => e.Position)
                                .Select(t => t.Subdivison)
                                .Where(o => o.Name == name)
                                .FirstOrDefault();
-            return find != null ? find : new Subdivison() { Name = name };
+            if (find != null) {
+                emp.Position.Subdivison = find;
+            } else {
+                emp.Position.Subdivison = new Subdivison() { Name = name };
+            }
+            return emp;
         }
-        Position GetOrFindPosition(CompanyPhoneBook db, string name) {
+        Employee GetOrFindPosition(CompanyPhoneBook db, Employee emp, string name) {
             var find = db.Employees
                                .Select(e => e.Position)
                                .Where(o => o.Name == name)
                                .FirstOrDefault();
-            return find != null ? find : new Position() { Name = name };
+            if (find != null) {
+                emp.Position = find;
+            } else {
+                emp.Position = new Position() { Name = name };
+            }
+            return emp;          
         }
 
-        ExtensionPhone GetOrFindExtensionPhone(CompanyPhoneBook db, string number, string site) {
+        Employee GetOrFindExtensionPhone(CompanyPhoneBook db, Employee emp,  string number, string site) {
             var find = db.Employees
                                .Select(e => e.ExtensionPhone)
                                 .Where(o => o.Number == number)
                                 .FirstOrDefault();
-            //if (find != null) {
-            //    emp
-            //}
-            return find != null ? find : new ExtensionPhone() { Number = number, InstallationSite = site };
+            if (find != null) {
+                emp.ExtensionPhone = find;
+            } else {
+                emp.ExtensionPhone = new ExtensionPhone() { Number = number, InstallationSite = site };
+            }
+            return emp;
         }
        
     }
