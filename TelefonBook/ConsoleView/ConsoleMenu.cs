@@ -11,8 +11,8 @@ namespace ConsoleView {
     class ConsoleMenu {
         string[] menuItems;
         int counter = 0;
-        public string HeaderString1 { get; set; }
-        public string HeaderString2 { get; set; }
+        public string Header1 { get; set; }
+        public string Header2 { get; set; }
         public ConsoleMenu(string[] menuItems) {
             this.menuItems = menuItems;
         }
@@ -21,9 +21,9 @@ namespace ConsoleView {
             ConsoleKeyInfo key;
             do {
                 Console.Clear();
-                Console.WriteLine(HeaderString1);
+                Console.WriteLine(Header1);
                 Console.WriteLine();
-                Console.WriteLine(HeaderString2);
+                Console.WriteLine(Header2);
                 Console.WriteLine();
                 for (int i = 0; i < menuItems.Length; i++) {
                     if (counter == i) {
