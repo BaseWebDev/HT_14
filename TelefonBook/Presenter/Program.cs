@@ -9,6 +9,9 @@ namespace ConsoleView {
     
         class Program {
             static void Main(string[] args) {
+                ConsoleAction view = new ConsoleAction();
+            Presenter presenter = new Presenter(view);
+            view.Run();
             }
         
 

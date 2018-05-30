@@ -7,6 +7,7 @@ namespace TelefonBook {
     /// </summary>
     public class Subdivison {
         public int Id { get; set; }
+        [Required]
         /// <summary>
         /// Название отдела
         /// </summary>

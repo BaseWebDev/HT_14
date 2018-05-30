@@ -55,6 +55,7 @@
     <Compile Include="ExtensionPhone.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Position.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subdivison.cs" />
   </ItemGroup>

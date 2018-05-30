@@ -7,12 +7,12 @@ using TelefonBook;
 
 
 namespace ConsoleView {
-    class ConsoleAction: IView {
+    public class ConsoleAction: IView {
         delegate void method();
         delegate void methodFind();
         const string hMain = "\t Телефонный справочник предприятия";
         const string hContact = "Выбирите действие для контакта:";
-        string[] items = { "Вывести все контакты", "Создать новый", "Найти",  "Удалить",   "Инициализация"};
+        string[] items = { "Вывести все контакты", "Создать новый", "Найти",  "Удалить",   "Инициализация", "Выход"};
 
         public string[] InputContact { get; private set; }
         public string InputFindContact { get; private set; }
@@ -22,15 +22,8 @@ namespace ConsoleView {
         public event EventHandler<EventArgs> SetFindContacts;
         public event EventHandler<EventArgs> SetDeleteContacts;
         public event EventHandler<EventArgs> SetInitTestContacts;
-
-        public string[] MenuItem {
-            private get { return items; }
-            set {
-                items = new string[value.Length + 1];
-                items[value.Length] = "Выход";
-            }
-        }
-        void Run() {        
+        
+        public void Run() {        
             method[] methods = new method[] { Display, New, Find, Delete, Init, Exit };
             ConsoleMenu menu = new ConsoleMenu(items);
             menu.Header1 = hMain;
@@ -46,7 +39,7 @@ namespace ConsoleView {
         void Display() {
             Console.WriteLine("Вывести номера справочника");
             if (SetShowAllContacts != null) {
-                SetDeleteContacts(this, EventArgs.Empty);
+                SetShowAllContacts(this, EventArgs.Empty);
             }
         }
         void New() {

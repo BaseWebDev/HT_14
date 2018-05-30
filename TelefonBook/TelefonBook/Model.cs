@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TelefonBook {
     public class Model {
@@ -60,7 +57,8 @@ namespace TelefonBook {
         /// <returns></returns>
         public List<Employee> ShowAll() {
             using (var db = new CompanyPhoneBook()) {
-                return db.Employees.ToList();
+                var emp = db.Employees.Select(x => x).ToList();
+                return emp;
                 //foreach (var emp in emps) { 
                 //    yield return emp;
                 //}  // var emps = 
@@ -141,11 +139,15 @@ namespace TelefonBook {
                                .FirstOrDefault();
             return find != null ? find : new Position() { Name = name };
         }
-        ExtensionPhone GetOrFindExtensionPhone(CompanyPhoneBook db, string number, string site) {
+
+        ExtensionPhone GetOrFindExtensionPhone(CompanyPhoneBook db, Employee emp, string number, string site) {
             var find = db.Employees
                                .Select(e => e.ExtensionPhone)
                                 .Where(o => o.Number == number)
                                 .FirstOrDefault();
+            //if (find != null) {
+            //    emp
+            //}
             return find != null ? find : new ExtensionPhone() { Number = number, InstallationSite = site };
         }
        
