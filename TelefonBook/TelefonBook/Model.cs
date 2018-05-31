@@ -3,119 +3,109 @@ using System.Linq;
 
 namespace TelefonBook {
     public class Model {
+        CompanyPhoneBook db = null;
+        public Model() {
+            db = new CompanyPhoneBook();
+        }
         /// <summary>
         /// Создать новый контакт
         /// </summary>
         /// <param name="emp">Сотрудник</param>
         public void New(Employee emp) {
-            using (var db = new CompanyPhoneBook()) {
-                Employee tempEmp = new Employee() {
-                    FirstName = emp.FirstName,
-                    MiddleName = emp.MiddleName,
-                    LastName = emp.LastName,
-                    NumberHomePhone = emp.NumberHomePhone,
-                };
-                tempEmp= GetOrFindExtensionPhone(db, tempEmp, emp.ExtensionPhone.Number, emp.ExtensionPhone.InstallationSite);
-                tempEmp= GetOrFindPosition(db, tempEmp, emp.Position.Name);
-                tempEmp= GetOrFindSubdivison(db, tempEmp, emp.Position.Subdivison.Name);
-                tempEmp= GetOrFindDivison(db, tempEmp, emp.Position.Subdivison.Divison.Name);
+            Employee tempEmp = GetOrFindEmployee(emp.FirstName,emp.MiddleName, emp.LastName, emp.NumberHomePhone) ;
+                tempEmp= GetOrFindExtensionPhone(tempEmp, emp.ExtensionPhone.Number, emp.ExtensionPhone.InstallationSite);
+                tempEmp= GetOrFindPosition(tempEmp, emp.Position.Name);
+                tempEmp= GetOrFindSubdivison(tempEmp, emp.Position.Subdivison.Name);
+                tempEmp= GetOrFindDivison(tempEmp, emp.Position.Subdivison.Divison.Name);
                 db.Employees.Add(tempEmp);
                 db.SaveChanges();
-            }
         }
         /// <summary>
         /// Удалить 
         /// </summary>
         /// <param name="nameOrExtensionPhone">Фамилия или внутренний номер абонента</param>
         public void Delete(string nameOrExtensionPhone) {   
-                using (var db = new CompanyPhoneBook()) {
-                    foreach (var emp in Find(nameOrExtensionPhone)) {
+             foreach (var emp in Find(nameOrExtensionPhone)) {
                         db.Employees.Remove(emp);
                     }
                     db.SaveChanges();
-                }
         }
         /// <summary>
         /// Поиск 
         /// </summary>
         /// <param name="nameOrExtensionPhone">Фамилия или внутренний номер абонента</param>
         public List<Employee> Find(string nameOrExtensionPhone) {
-            using (var db = new CompanyPhoneBook()) {
-                return db.Employees
-                                .Where(o => o.LastName.Contains(nameOrExtensionPhone) || o.ExtensionPhone.Number.Contains(nameOrExtensionPhone))
-                                .OrderBy(x => x.ExtensionPhone.Number)
-                                .ToList();
-                //foreach (var emp in emps) {
-                //    yield return emp;
-                //    //     Console.WriteLine("{0}. {1} {2} - {4} - {3}", emp.Id, emp.LastName, emp.FirstName, emp.ExtensionPhone.Number, emp.Position.Name);
-                //}
-            }
+            return db.Employees
+                .Where(o => o.LastName.Contains(nameOrExtensionPhone) || o.ExtensionPhone.Number.Contains(nameOrExtensionPhone))
+                .OrderBy(x => x.ExtensionPhone.Number)
+                .ToList();
         }
         /// <summary>
         /// Отобразить все контакты
         /// </summary>
         /// <returns></returns>
         public List<Employee> ShowAll() {
-            using (var db = new CompanyPhoneBook()) {
-                var emp = db.Employees.ToList();
-                return emp;
-                //foreach (var emp in emps) { 
-                //    yield return emp;
-                //}  // var emps = 
-            }
-            // Console.WriteLine("{0}. {1} {2} - {4} - {3}", emp.Id, emp.LastName, emp.FirstName, emp.ExtensionPhone.Number, emp.Position.Name);
+            var emp = db.Employees.ToList();
+            return emp;
         }
         /// <summary>
         /// Инициализация БД
         /// </summary>
         public void InitTest() {
-            using (var db = new CompanyPhoneBook()) {
-                Employee Ivanov = new Employee() {
-                    FirstName = "Иван",
-                    MiddleName = "Иванович",
-                    LastName = "Иванов",
-                    NumberHomePhone = "8-915-841-30-08",
-                };
-                Ivanov= GetOrFindExtensionPhone(db, Ivanov, "432", "Здание Управления, 3 этаж, каб. 25");
-                Ivanov= GetOrFindPosition(db, Ivanov, "Главный экономист");
-                Ivanov= GetOrFindSubdivison(db, Ivanov, "Плановый отдел");
-                Ivanov= GetOrFindDivison(db, Ivanov, "Упраление");
-                db.Employees.Add(Ivanov);
+            Employee Ivanov = new Employee() {
+                FirstName = "Иван",
+                MiddleName = "Иванович",
+                LastName = "Иванов",
+                NumberHomePhone = "8-915-841-30-08",
+            };
+            Ivanov= GetOrFindExtensionPhone(Ivanov, "432", "Здание Управления, 3 этаж, каб. 25");
+            Ivanov= GetOrFindPosition(Ivanov, "Главный экономист");
+            Ivanov= GetOrFindSubdivison(Ivanov, "Плановый отдел");
+            Ivanov= GetOrFindDivison(Ivanov, "Управление");
+            db.Employees.Add(Ivanov);
+            db.SaveChanges();
 
-                Employee Petrov = new Employee() {
-                    FirstName = "Петр",
-                    MiddleName = "Петрович",
-                    LastName = "Петров",
-                    NumberHomePhone = "8-985-834-23-76"
-                };
-                Petrov= GetOrFindExtensionPhone(db, Petrov, "156", "Здание Управления, 2 этаж, каб. 11");
-                Petrov= GetOrFindPosition(db, Petrov, "Оператор ЭВМ");
-                Petrov= GetOrFindSubdivison(db, Petrov, "ОМТС");
-                Petrov= GetOrFindDivison(db, Petrov, "Упраление");
-                db.Employees.Add(Petrov);
+            Employee Petrov = new Employee() {
+                FirstName = "Петр",
+                MiddleName = "Петрович",
+                LastName = "Петров",
+                NumberHomePhone = "8-985-834-23-76"
+            };
+            Petrov= GetOrFindExtensionPhone(Petrov, "156", "Здание Управления, 2 этаж, каб. 11");
+            Petrov= GetOrFindPosition(Petrov, "Оператор ЭВМ");
+            Petrov= GetOrFindSubdivison(Petrov, "ОМТС");
+            Petrov= GetOrFindDivison(Petrov, "Управление");
+            db.Employees.Add(Petrov);
+            db.SaveChanges();
 
-                Employee Sidorov = new Employee() {
-                    FirstName = "Егор",
-                    MiddleName = "Станиславович",
-                    LastName = "Сидоров",
-                    NumberHomePhone = "8-910-123-38-07",
-                };
-                Sidorov= GetOrFindExtensionPhone(db, Sidorov, "232", "Здание Управления, 3 этаж, каб. 25");
-                Sidorov= GetOrFindPosition(db, Sidorov, "Начальник отдела");
-                Sidorov= GetOrFindSubdivison(db, Sidorov, "Плановый отдел");
-                Sidorov= GetOrFindDivison(db, Sidorov, "Упраление");
-                db.Employees.Add(Sidorov);
-                db.SaveChanges();
-            }
+            Employee Sidorov = new Employee() {
+                FirstName = "Егор",
+                MiddleName = "Станиславович",
+                LastName = "Сидоров",
+                NumberHomePhone = "8-910-123-38-07",
+            };
+            Sidorov= GetOrFindExtensionPhone(Sidorov, "232", "Здание Управления, 3 этаж, каб. 25");
+            Sidorov= GetOrFindPosition(Sidorov, "Начальник отдела");
+            Sidorov= GetOrFindSubdivison(Sidorov, "Плановый отдел");
+            Sidorov= GetOrFindDivison(Sidorov, "Управление");
+            db.Employees.Add(Sidorov);
+            db.SaveChanges();
+            
         }
 
-        Employee GetOrFindEmployee(CompanyPhoneBook db, string firstName, string lastName, string middleName) {
+        Employee GetOrFindEmployee(string firstName, string lastName, string middleName, string numberHomePhone) {
+            Employee emp;
             var find = db.Employees
                                .Where(o => o.FirstName == firstName & o.LastName== lastName & o.MiddleName==middleName)
                                .FirstOrDefault();
-            return find != null ? find : new Employee() { FirstName = firstName, LastName = lastName, MiddleName = middleName };
+            if (find != null) {
+                emp = find;
+            } else {
+                emp =  new Employee() { FirstName = firstName, LastName = lastName, MiddleName = middleName, NumberHomePhone =numberHomePhone };
+            }
+            return emp;
         }
-        Employee GetOrFindDivison(CompanyPhoneBook db, Employee emp, string name) {
+        Employee GetOrFindDivison(Employee emp, string name) {
             var find = db.Employees
                                .Select(e => e.Position)
                                .Select(t => t.Subdivison)
@@ -129,7 +119,7 @@ namespace TelefonBook {
             }
             return emp;
         }
-        Employee GetOrFindSubdivison(CompanyPhoneBook db, Employee emp, string name) {
+        Employee GetOrFindSubdivison(Employee emp, string name) {
             var find = db.Employees
                                .Select(e => e.Position)
                                .Select(t => t.Subdivison)
@@ -142,7 +132,7 @@ namespace TelefonBook {
             }
             return emp;
         }
-        Employee GetOrFindPosition(CompanyPhoneBook db, Employee emp, string name) {
+        Employee GetOrFindPosition(Employee emp, string name) {
             var find = db.Employees
                                .Select(e => e.Position)
                                .Where(o => o.Name == name)
@@ -155,7 +145,7 @@ namespace TelefonBook {
             return emp;          
         }
 
-        Employee GetOrFindExtensionPhone(CompanyPhoneBook db, Employee emp,  string number, string site) {
+        Employee GetOrFindExtensionPhone(Employee emp,  string number, string site) {
             var find = db.Employees
                                .Select(e => e.ExtensionPhone)
                                 .Where(o => o.Number == number)

@@ -26,20 +26,20 @@ namespace ConsoleView {
             view.ShowListContact(temp);
         }
         private void OnSetNewContact(object sender, EventArgs e) {
-            model.New(new Employee() { LastName =view.InputContact[0],
-                FirstName = view.InputContact[0],
+            model.New(new Employee() { LastName =view.InputContact[2],
+                FirstName = view.InputContact[1],
                 MiddleName = view.InputContact[0],
-                NumberHomePhone = view.InputContact[0],
+                NumberHomePhone = view.InputContact[3],
                 ExtensionPhone = new ExtensionPhone() {
-                    Number = view.InputContact[0],
-                    InstallationSite = view.InputContact[0],
+                    Number = view.InputContact[4],
+                    InstallationSite = view.InputContact[5],
                 },
                 Position = new Position (){
-                    Name = view.InputContact[0],
+                    Name = view.InputContact[6],
                     Subdivison = new Subdivison() {
-                        Name = view.InputContact[0],
+                        Name = view.InputContact[7],
                         Divison = new Divison() {
-                            Name = view.InputContact[0]
+                            Name = view.InputContact[8]
                         }
                     }
                 }

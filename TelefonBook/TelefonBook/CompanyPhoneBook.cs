@@ -5,7 +5,7 @@ using System.Data.Entity;
 namespace TelefonBook {
     public class CompanyPhoneBook : DbContext {
         public CompanyPhoneBook() : base("CompanyPhoneBook") {
-           this.Configuration.LazyLoadingEnabled = false;
+           // this.Configuration.LazyLoadingEnabled = false;
         }
 
         static CompanyPhoneBook() {
