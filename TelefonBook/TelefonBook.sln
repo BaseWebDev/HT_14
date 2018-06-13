@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelefonBook", "TelefonBook\TelefonBook.csproj", "{DFA920E5-D7B9-4EBA-96BB-AA0FC9F76421}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "TelefonBook\Model.csproj", "{DFA920E5-D7B9-4EBA-96BB-AA0FC9F76421}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presenter", "Presenter\Presenter.csproj", "{AA05FC56-D19F-4107-870C-545A730D598B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "ConsoleView\View.csproj", "{715FD5BD-9CD9-47C3-8D45-E73FC5B9E053}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{DFA920E5-D7B9-4EBA-96BB-AA0FC9F76421}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFA920E5-D7B9-4EBA-96BB-AA0FC9F76421}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFA920E5-D7B9-4EBA-96BB-AA0FC9F76421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA05FC56-D19F-4107-870C-545A730D598B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA05FC56-D19F-4107-870C-545A730D598B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA05FC56-D19F-4107-870C-545A730D598B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA05FC56-D19F-4107-870C-545A730D598B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{715FD5BD-9CD9-47C3-8D45-E73FC5B9E053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{715FD5BD-9CD9-47C3-8D45-E73FC5B9E053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{715FD5BD-9CD9-47C3-8D45-E73FC5B9E053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{715FD5BD-9CD9-47C3-8D45-E73FC5B9E053}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

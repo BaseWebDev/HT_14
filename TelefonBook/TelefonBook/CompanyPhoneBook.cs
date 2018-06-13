@@ -4,7 +4,9 @@ using System.Data.Entity;
 
 namespace TelefonBook {
     public class CompanyPhoneBook : DbContext {
-        public CompanyPhoneBook() : base("CompanyPhoneBook") { }
+        public CompanyPhoneBook() : base("CompanyPhoneBook") {
+           // this.Configuration.LazyLoadingEnabled = false;
+        }
 
         static CompanyPhoneBook() {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CompanyPhoneBook>());

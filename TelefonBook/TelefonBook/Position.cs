@@ -7,6 +7,7 @@ namespace TelefonBook {
     /// </summary>
     public class Position {
         public int Id { get; set; }
+        [Required]
         /// <summary>
         /// Название должности
         /// </summary>

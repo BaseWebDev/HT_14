@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TelefonBook {
+namespace ConsoleView {
     /// <summary>
     /// На основе http://studassistent.ru/charp/menyu-v-konsolnom-prilozhenii-c
     /// </summary>
     class ConsoleMenu {
         string[] menuItems;
         int counter = 0;
-        public string HeaderString1 { get; set; }
-        public string HeaderString2 { get; set; }
+        public string Header1 { get; set; }
+        public string Header2 { get; set; }
         public ConsoleMenu(string[] menuItems) {
             this.menuItems = menuItems;
         }
@@ -17,9 +21,9 @@ namespace TelefonBook {
             ConsoleKeyInfo key;
             do {
                 Console.Clear();
-                Console.WriteLine(HeaderString1);
+                Console.WriteLine(Header1);
                 Console.WriteLine();
-                Console.WriteLine(HeaderString2);
+                Console.WriteLine(Header2);
                 Console.WriteLine();
                 for (int i = 0; i < menuItems.Length; i++) {
                     if (counter == i) {
@@ -46,6 +50,5 @@ namespace TelefonBook {
             while (key.Key != ConsoleKey.Enter);
             return counter;
         }
-
     }
 }

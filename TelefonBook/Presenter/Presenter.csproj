@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DFA920E5-D7B9-4EBA-96BB-AA0FC9F76421}</ProjectGuid>
+    <ProjectGuid>{AA05FC56-D19F-4107-870C-545A730D598B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TelefonBook</RootNamespace>
-    <AssemblyName>TelefonBook</AssemblyName>
+    <RootNamespace>Presenter</RootNamespace>
+    <AssemblyName>Presenter</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -49,19 +49,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompanyPhoneBook.cs" />
-    <Compile Include="ConsoleMenu.cs" />
-    <Compile Include="Divison.cs" />
-    <Compile Include="Employee.cs" />
-    <Compile Include="ExtensionPhone.cs" />
-    <Compile Include="Position.cs" />
+    <Compile Include="Presenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Subdivison.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleView\View.csproj">
+      <Project>{715fd5bd-9cd9-47c3-8d45-e73fc5b9e053}</Project>
+      <Name>View</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TelefonBook\Model.csproj">
+      <Project>{dfa920e5-d7b9-4eba-96bb-aa0fc9f76421}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
