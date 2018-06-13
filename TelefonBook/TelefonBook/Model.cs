@@ -12,13 +12,14 @@ namespace TelefonBook {
         /// </summary>
         /// <param name="emp">Сотрудник</param>
         public void New(Employee emp) {
-            Employee tempEmp = GetOrFindEmployee(emp.FirstName,emp.MiddleName, emp.LastName, emp.NumberHomePhone) ;
-                tempEmp= GetOrFindExtensionPhone(tempEmp, emp.ExtensionPhone.Number, emp.ExtensionPhone.InstallationSite);
-                tempEmp= GetOrFindPosition(tempEmp, emp.Position.Name);
-                tempEmp= GetOrFindSubdivison(tempEmp, emp.Position.Subdivison.Name);
-                tempEmp= GetOrFindDivison(tempEmp, emp.Position.Subdivison.Divison.Name);
-                db.Employees.Add(tempEmp);
-                db.SaveChanges();
+            Employee tempEmp = GetOrFindEmployee(emp.FirstName, emp.MiddleName, emp.LastName, emp.NumberHomePhone);
+            tempEmp = GetOrFindExtensionPhone(tempEmp, emp.ExtensionPhone.Number, emp.ExtensionPhone.InstallationSite);
+            tempEmp = GetOrFindPosition(tempEmp, emp.Position.Name);
+            tempEmp = GetOrFindSubdivison(tempEmp, emp.Position.Subdivison.Name);
+            tempEmp = GetOrFindDivison(tempEmp, emp.Position.Subdivison.Divison.Name);
+            db.Employees.Add(tempEmp);
+            // db.Employees.Add(emp);
+            db.SaveChanges();
         }
         /// <summary>
         /// Удалить 

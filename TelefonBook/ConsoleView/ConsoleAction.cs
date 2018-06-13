@@ -36,13 +36,13 @@ namespace ConsoleView {
                 Console.ReadKey();
             } while (menuResult != items.Length - 1);
         }
-        void Display() {
+        private void Display() {
             Console.WriteLine("Вывести номера справочника");
             if (SetShowAllContacts != null) {
                 SetShowAllContacts(this, EventArgs.Empty);
             }
         }
-        void New() {
+        private void New() {
             InputContact = new List<string>();
             Console.Write("Добавить контакт сотрудника."); Console.WriteLine("Введите:");
             Console.Write("Фамилия: "); InputContact.Add(Console.ReadLine());
@@ -60,10 +60,11 @@ namespace ConsoleView {
                 SetNewContact(this, EventArgs.Empty);
             }
         }
+
         /// <summary>
         /// Поиск по сотруднику или внутреннему номеру
         /// </summary>
-        void Find() {
+        private void Find() {
             Console.Write("Введите фамилию сотрудника или внутренний номер: ");
             InputFindContact = Console.ReadLine();
             if (SetFindContacts != null) {
@@ -71,7 +72,7 @@ namespace ConsoleView {
             }
         }
 
-        void Delete() {
+        private void Delete() {
             Console.Write("Введите внутренний номер абонента или фамилию для удаления контакта: ");
             InputFindContact = Console.ReadLine();
             if (SetDeleteContacts != null) {
@@ -80,14 +81,14 @@ namespace ConsoleView {
         }        
         
         
-        void Init() {
+        private void Init() {
             Console.WriteLine("Инициализация БД");
             if (SetInitTestContacts != null) {
                 SetInitTestContacts(this, EventArgs.Empty);
             }
             Console.WriteLine("Инициализация БД завершена.");
         }
-        void Exit() {
+        private void Exit() {
             Console.WriteLine("Завершение работы с приложением!");
         }
 
